@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Next.Steps.Domain.Entities
 {
@@ -19,7 +18,6 @@ namespace Next.Steps.Domain.Entities
         public string Email { get; set; }
 
         public IEnumerable<Hobby> Hobies { get; set; }
-
 
     }
 }
