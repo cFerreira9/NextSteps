@@ -2,39 +2,12 @@
 using Next.Steps.Domain.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Next.Steps.Domain.Services
 {
-    public class PersonService : IPersonService
+    class PersonService : BaseService<Person>, IPersonService //?? o porquê da interface estar aqui
     {
-        public void Create(Person p)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Person> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Person GetByID(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Person> Search(string firstName, string lastName = "")
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Person p)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
