@@ -2,8 +2,8 @@
 
 namespace Next.Steps.Domain.Interfaces.Repositories
 {
-    interface IPersonRepository : IBaseRepository<Person>
+    public interface IPersonRepository : IBaseRepository<Person>
     {
-        
+
     }
 }

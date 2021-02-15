@@ -2,7 +2,7 @@
 
 namespace Next.Steps.Domain.Interfaces.Services
 {
-    interface IPersonService : IBaseService<Person>
+    public interface IPersonService : IBaseService<Person>
     {
 
     }

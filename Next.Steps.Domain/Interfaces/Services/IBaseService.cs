@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Next.Steps.Domain.Interfaces.Services
 {
-    interface IBaseService<TEntity> where TEntity : class
+    public interface IBaseService<TEntity> where TEntity : class
     {
         void Create(TEntity p);
 

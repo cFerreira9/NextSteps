@@ -2,7 +2,7 @@
 
 namespace Next.Steps.Domain.Interfaces.Repositories
 {
-    interface IBaseRepository<TEntity> where TEntity : class
+    public interface IBaseRepository<TEntity> where TEntity : class
     {
         void Create(TEntity p);
 
