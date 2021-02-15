@@ -10,11 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Next.Steps.Domain", "Next.Steps.Domain\Next.Steps.Domain.csproj", "{ABC02108-DFB1-436E-A086-1966E2E55F42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Next.Steps.API", "Next.Steps.API\Next.Steps.API.csproj", "{9EF6DE68-8292-4DC1-9728-01BCA7EF8DCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Next.Steps.API", "Next.Steps.API\Next.Steps.API.csproj", "{9EF6DE68-8292-4DC1-9728-01BCA7EF8DCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Next.Steps.Repository", "Next.Steps.Repository\Next.Steps.Repository.csproj", "{11A14140-A8F6-4947-A0A4-82F2B1345028}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Next.Steps.Repository.EF", "Next.Steps.Repository\Next.Steps.Repository.EF.csproj", "{11A14140-A8F6-4947-A0A4-82F2B1345028}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Next.Steps.Application", "Next.Steps.Application\Next.Steps.Application.csproj", "{FACC2630-F1CA-442D-BD92-0E06362488F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Next.Steps.Application", "Next.Steps.Application\Next.Steps.Application.csproj", "{FACC2630-F1CA-442D-BD92-0E06362488F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

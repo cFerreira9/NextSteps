@@ -6,8 +6,8 @@ using System.Text;
 
 namespace Next.Steps.Domain.Services
 {
-    class PersonService : BaseService<Person>, IPersonService //?? o porquê da interface estar aqui
+    class PersonService : BaseService<Person>, IPersonService
     {
-        
+
     }
 }
