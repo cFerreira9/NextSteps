@@ -199,7 +199,6 @@ namespace Next.Steps.Repository.ADO
                     {
                         var person = new Person()
                         {
-                            Id = (int)dr["Id"],
                             FirstName = (string)dr["Firstname"],
                             LastName = (string)dr["Lastname"]
                         };
