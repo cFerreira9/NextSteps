@@ -32,10 +32,12 @@ namespace Next.Steps.Repository.ADO
                     cmd.Parameters.AddWithValue("@Hobbies", p.Hobbies);
 
                     conn.Close();
+                    return true;
+
                 }
                 catch(Exception)
                 {
-                    Console.WriteLine("Não foi possível criar um cliente.");
+                    return false;
                 }
             }
 
@@ -64,10 +66,12 @@ namespace Next.Steps.Repository.ADO
                     cmd.Parameters.AddWithValue("@Hobbies", p.Hobbies);
 
                     conn.Close();
+
+                    return true;
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Não foi possível actualizar os dados do cliente.");
+                    return false;
                 }
             }
         }
@@ -89,11 +93,13 @@ namespace Next.Steps.Repository.ADO
 
                     conn.Close();
 
+                    return true;
+
                 }
                 catch (Exception)
                 {
 
-                    Console.WriteLine("Não foi possível eliminar o cliente.");
+                    return false;
                 }
             }
         }
@@ -170,9 +176,9 @@ namespace Next.Steps.Repository.ADO
                     }
                     conn.Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Console.WriteLine("Não foi possível encontrar o cliente com o ID: " + id);
+                    Console.WriteLine(ex.Message);
                 }
                 return null;
             }
