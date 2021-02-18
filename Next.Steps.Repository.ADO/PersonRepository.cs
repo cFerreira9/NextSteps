@@ -11,7 +11,7 @@ namespace Next.Steps.Repository.ADO
         private string cs = @"Data Source=DESKTOP-JN31U5B\SQLEXPRESS" + "Initial Catalog=CarlosFerreira_Project"
                 + "Integrated Security=True";
 
-        public void Create(Person p)
+        public bool Create(Person p)
         {
             string queryString = "INSERT INTO[Person](Firstname, Lastname, Profession, Birthdate, Email, Hobbies)"
                 + "VALUES(@Firstname, @Lastname, @Profession, @Birthdate, @Email, @Hobbies)";
@@ -41,7 +41,7 @@ namespace Next.Steps.Repository.ADO
 
         }
 
-        public void Update(Person p)
+        public bool Update(Person p)
         {
             string queryString = "UPDATE Person"
                 + "SET Firstname = @Firstname, LastName = @Lastname, Profession = @Profession, Birthdate = @Birthdate, Email = @Email, Hobbies = @Hobbies"
@@ -72,7 +72,7 @@ namespace Next.Steps.Repository.ADO
             }
         }
 
-        public void Delete(Person p)
+        public bool Delete(Person p)
         {
             string queryString = "DELETE FROM Users"
                 + "WHERE Id = @Id";
@@ -214,6 +214,5 @@ namespace Next.Steps.Repository.ADO
             }
             return list;
         }
-
     }
 }

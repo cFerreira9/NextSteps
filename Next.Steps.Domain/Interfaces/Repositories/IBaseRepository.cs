@@ -4,11 +4,11 @@ namespace Next.Steps.Domain.Interfaces.Repositories
 {
     public interface IBaseRepository<TEntity> where TEntity : class
     {
-        void Create(TEntity p);
+        bool Create(TEntity p);
 
-        void Update(TEntity p);
+        bool Update(TEntity p);
 
-        void Delete(TEntity p);
+        bool Delete(TEntity p);
 
         TEntity GetByID(int id);
 
