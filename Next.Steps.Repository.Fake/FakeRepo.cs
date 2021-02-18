@@ -15,7 +15,9 @@ namespace Next.Steps.Repository.Fake
             if (index != -1)
             {
                 list.Add(p);
+                return true;
             }
+
             return false;
         }
 
@@ -26,6 +28,7 @@ namespace Next.Steps.Repository.Fake
             if (index >= 0)
             {
                 list[index] = p;
+                return true;
             }
 
             return false;
@@ -38,6 +41,7 @@ namespace Next.Steps.Repository.Fake
             if (index >= 0)
             {
                 list.Remove(p);
+                return true;
             }
 
             return false;
