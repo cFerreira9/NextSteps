@@ -11,54 +11,36 @@ namespace Next.Steps.Repository.Fake
 
         public bool Create(Person p)
         {
-            bool check;
             var index = list.IndexOf(p);
             if (index != -1)
             {
                 list.Add(p);
-                check = true;
             }
-            else
-            {
-                check = false;
-            }
-            return check;
+            return false;
         }
 
         public bool Update(Person p)
         {
-            bool check;
             var index = list.IndexOf(p);
 
             if (index >= 0)
             {
                 list[index] = p;
-                check = true;
-            }
-            else
-            {
-                check = false;
             }
 
-            return check;
+            return false;
         }
 
         public bool Delete(Person p)
         {
-            bool check;
             var index = list.IndexOf(p);
 
             if (index >= 0)
             {
                 list.Remove(p);
-                check = true;
-            }
-            else
-            {
-                check = false;
             }
 
-            return check;
+            return false;
         }
 
         public IEnumerable<Person> GetAll()
