@@ -1,8 +1,6 @@
 ﻿using Next.Steps.Domain.Entities;
 using Next.Steps.Domain.Interfaces.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Next.Steps.Repository.Fake
 {
@@ -86,5 +84,6 @@ namespace Next.Steps.Repository.Fake
             return list.FindAll(l => l.FirstName == firstName || (lastName != "" && l.LastName == lastName));
 
         }
+
     }
 }
