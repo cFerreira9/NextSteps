@@ -3,5 +3,7 @@
     public class Hobby
     {
         public string Name { get; set; }
+
+        public string Type { get; set; }
     }
 }
