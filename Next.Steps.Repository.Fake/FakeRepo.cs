@@ -17,10 +17,8 @@ namespace Next.Steps.Repository.Fake
                 list.Add(p);
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public bool Update(Person p)
