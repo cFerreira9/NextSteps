@@ -20,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Next.Steps.Repository.Fake"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestruturas", "Infraestruturas", "{825F2890-68E3-40EE-9254-BC8EA6C238EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Next.Steps.API", "Next.Steps.API\Next.Steps.API.csproj", "{942341A4-1A2C-4F2D-B004-095A635DF62A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Next.Steps.API", "Next.Steps.API\Next.Steps.API.csproj", "{CD75DA3B-320E-494D-984D-F0524472ADBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,10 +48,10 @@ Global
 		{2684832E-057D-4F21-B4FC-320016E2DBEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2684832E-057D-4F21-B4FC-320016E2DBEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2684832E-057D-4F21-B4FC-320016E2DBEB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{942341A4-1A2C-4F2D-B004-095A635DF62A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{942341A4-1A2C-4F2D-B004-095A635DF62A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{942341A4-1A2C-4F2D-B004-095A635DF62A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{942341A4-1A2C-4F2D-B004-095A635DF62A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD75DA3B-320E-494D-984D-F0524472ADBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD75DA3B-320E-494D-984D-F0524472ADBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD75DA3B-320E-494D-984D-F0524472ADBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD75DA3B-320E-494D-984D-F0524472ADBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
