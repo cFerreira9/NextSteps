@@ -23,13 +23,30 @@ namespace Next.Steps.Repository.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-JN31U5B\SQLEXPRESS;
+                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-JN31U5B;
                 Initial Catalog=Next_Steps_Project;
                 Persist Security Info=True;
-                User id=sa
-                password=Next123");
+                User id=sa;
+                Password=Next123");
             }
             base.OnConfiguring(optionsBuilder);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("nextSteps");
+
+            modelBuilder.Entity<Person>( entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.FirstName).IsRequired();
+                entity.Property(e => e.LastName).IsRequired();
+                entity.Property(e => e.Profession).IsRequired();
+                entity.Property(e => e.Birthdate).IsRequired();
+                entity.Property(e => e.Email).IsRequired();
+                entity.Property(e => e.Hobbies);
+            }
+            );
         }
 
         public override int SaveChanges()
