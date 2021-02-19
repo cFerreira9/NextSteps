@@ -76,6 +76,7 @@ namespace Next.Steps.Repository.EF.Repository
         public IEnumerable<TEntity> Search(string firstName, string lastName = "")
         {
             //return _nextStepsContext.Set<TEntity>().ToList().FindAll(x => x.);
+            return null;
         }
 
     }

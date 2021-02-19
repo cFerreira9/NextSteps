@@ -7,17 +7,12 @@ namespace Next.Steps.Domain.Services
 {
     internal class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class
     {
-        public void Create(TEntity p)
+        public bool Create(TEntity p)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(TEntity p)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -37,5 +32,9 @@ namespace Next.Steps.Domain.Services
             throw new NotImplementedException();
         }
 
+        public bool Update(TEntity p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

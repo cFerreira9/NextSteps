@@ -17,8 +17,6 @@ namespace Next.Steps.Repository.Context
 
         public DbSet<Person> People { get; set; }
 
-        public DbSet<Hobby> Activities { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -27,7 +25,7 @@ namespace Next.Steps.Repository.Context
                 Initial Catalog=Next_Steps_Project;
                 Persist Security Info=True;
                 User id=sa;
-                Password=Next123");
+                Password=Password1994");
             }
             base.OnConfiguring(optionsBuilder);
         }
