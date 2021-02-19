@@ -17,7 +17,7 @@ namespace Next.Steps.Domain.Entities
 
         public string Email { get; set; }
 
-        public IEnumerable<Hobby> Hobbies { get; set; }
+        public virtual IEnumerable<Hobby> Hobbies { get; set; }
 
     }
 }
