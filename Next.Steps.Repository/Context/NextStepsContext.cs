@@ -27,7 +27,7 @@ namespace Next.Steps.Repository.Context
                 Initial Catalog=Next_Steps_Project;
                 Persist Security Info=True;
                 User id=sa;
-                Password=Next123");
+                Password=Password1994");
             }
             base.OnConfiguring(optionsBuilder);
         }
