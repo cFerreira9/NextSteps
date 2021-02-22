@@ -13,9 +13,4 @@
     <ProjectReference Include="..\Next.Steps.Domain\Next.Steps.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CommandHandler\" />
-    <Folder Include="QueryHandler\" />
-  </ItemGroup>
-
 </Project>

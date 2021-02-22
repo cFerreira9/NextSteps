@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace Next.Steps.Repository.ADO
 {
-    class PersonRepository : IPersonRepository
+    internal class PersonRepository : IPersonRepository
     {
         private string cs = @"Data Source=DESKTOP-JN31U5B\SQLEXPRESS" + "Initial Catalog=CarlosFerreira_Project"
                 + "Integrated Security=True";
@@ -33,14 +33,12 @@ namespace Next.Steps.Repository.ADO
 
                     conn.Close();
                     return true;
-
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     return false;
                 }
             }
-
         }
 
         public bool Update(Person p)
@@ -94,11 +92,9 @@ namespace Next.Steps.Repository.ADO
                     conn.Close();
 
                     return true;
-
                 }
                 catch (Exception)
                 {
-
                     return false;
                 }
             }

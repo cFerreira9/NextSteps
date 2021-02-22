@@ -1,15 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Next.Steps.Domain.Entities;
 using Next.Steps.Domain.Interfaces.Repositories;
 using Next.Steps.Repository.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Next.Steps.Repository.EF.Repository
 {
-    class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+    internal class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
         private readonly NextStepsContext _nextStepsContext;
 
@@ -28,7 +26,6 @@ namespace Next.Steps.Repository.EF.Repository
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
@@ -43,7 +40,6 @@ namespace Next.Steps.Repository.EF.Repository
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
@@ -58,7 +54,6 @@ namespace Next.Steps.Repository.EF.Repository
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
@@ -78,6 +73,5 @@ namespace Next.Steps.Repository.EF.Repository
             //return _nextStepsContext.Set<TEntity>().ToList().FindAll(x => x.);
             return null;
         }
-
     }
 }

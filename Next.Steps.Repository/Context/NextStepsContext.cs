@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Next.Steps.Domain.Entities;
-using System;
-using System.Linq;
 
 namespace Next.Steps.Repository.Context
 {

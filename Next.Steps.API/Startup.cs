@@ -23,8 +23,6 @@ namespace Next.Steps.API
         {
             services.AddControllers();
 
-            services.AddScoped<IPersonRepository, FakeRepo>();
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NextSteps Project", Version = "v1" });

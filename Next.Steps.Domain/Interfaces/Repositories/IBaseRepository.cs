@@ -10,10 +10,6 @@ namespace Next.Steps.Domain.Interfaces.Repositories
 
         bool Delete(TEntity p);
 
-        TEntity GetByID(int id);
-
         IEnumerable<TEntity> GetAll();
-
-        IEnumerable<TEntity> Search(string firstName, string lastName = "");
     }
 }

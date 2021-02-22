@@ -1,6 +1,6 @@
 ﻿namespace Next.Steps.Application.CommandHandler
 {
-    public class PersonUpdateCommandHandler
+    public class HobbyUpdateCommandHandler
     {
     }
 }

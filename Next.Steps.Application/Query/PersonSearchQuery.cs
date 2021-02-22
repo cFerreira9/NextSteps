@@ -2,7 +2,7 @@
 
 namespace Next.Steps.Application.Query
 {
-    public class PersonGetAllQuery /*: IRequest<>*/
+    public class PersonSearchQuery /*: IRequest<>*/
     {
     }
 }

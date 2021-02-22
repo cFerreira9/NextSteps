@@ -1,7 +1,11 @@
-﻿namespace Next.Steps.Application.Query
+﻿using MediatR;
+
+namespace Next.Steps.Application.Query
 {
-    public class PersonGetByIdQuery
+    public class PersonGetByIdQuery /*: IRequest<>*/
     {
         public int Id { get; set; }
+
+        //TODO reference
     }
 }

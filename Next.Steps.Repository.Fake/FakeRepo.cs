@@ -6,7 +6,6 @@ namespace Next.Steps.Repository.Fake
 {
     public class FakeRepo : IPersonRepository
     {
-
         private List<Person> list = new List<Person>();
 
         public bool Create(Person p)
@@ -68,8 +67,6 @@ namespace Next.Steps.Repository.Fake
         public IEnumerable<Person> Search(string firstName, string lastName = "")
         {
             return list.FindAll(l => l.FirstName == firstName || (lastName != "" && l.LastName == lastName));
-
         }
-
     }
 }
