@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Next.Steps.Domain.Entities;
-using Next.Steps.Repository.Fake;
-using System;
+using Next.Steps.Application.Command;
+using Next.Steps.Application.Dto;
+using Next.Steps.Application.Query;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Next.Steps.API.Controllers
 {
@@ -16,88 +14,88 @@ namespace Next.Steps.API.Controllers
     {
         private readonly ILogger<PersonController> _logger;
 
-        private readonly FakeRepo _frepo = new FakeRepo();
+        private readonly IMediator _mediator;
 
-        public PersonController(ILogger<PersonController> logger)
+        public PersonController(ILogger<PersonController> logger, IMediator mediator)
         {
-           _logger = logger;
+            _logger = logger;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Person>> GetAll()
+        public ActionResult<IEnumerable<PersonDto>> GetAll()
         {
-            var personCommand = _frepo.GetAll();
+            var query = new PersonGetAllQuery();
 
-            if (personCommand == null)
+            var response = _mediator.Send(query);
+
+            if (response == null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(personCommand);
+                return Ok(response);
             }
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Person> GetById(int id)
+        public ActionResult<PersonDto> GetById(int id)
         {
-            var personCommand = _frepo.GetByID(id);
+            var query = new PersonGetByIdQuery
+            {
+                Id = id
+            };
 
-            if (personCommand != _frepo.GetByID(id))
+            var response = _mediator.Send(query);
+
+            if (response == null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(personCommand);
+                return Ok(response);
             }
         }
 
         [HttpPost()]
-        public void Create(Person p)
+        public void Create(PersonDto p)
         {
-            var personCommand = _frepo.Create(p);
+            var command = new PersonCreateCommand
+            {
+                Person = p
+            };
 
-            if (personCommand != true)
-            {
-                _logger.LogError("COULDN'T CREATE!");
-            }
-            else
-            {
-                Ok(personCommand);
-            }
+            var status = _mediator.Send(command);
+
+            Ok(status);
         }
 
-        [HttpPut("{id}")]
-        public void Put(Person p)
+        [HttpPut()]
+        public void Put(PersonDto p)
         {
-            var personCommand = _frepo.Update(p);
+            var command = new PersonUpdateCommand
+            {
+                Person = p
+            };
 
-            if (personCommand != true)
-            {
-                _logger.LogError("COULDN'T UPDATE!");
-            }
-            else
-            {
-                Ok(personCommand);
-            }
+            var status = _mediator.Send(command);
+
+            Ok(status);
         }
 
-        [HttpDelete("{id}")]
-        public void Delete(Person p)
+        [HttpDelete()]
+        public void Delete(PersonDto p)
         {
-            var personCommand = _frepo.Delete(p);
-
-            if (personCommand != true)
+            var command = new PersonDeleteCommand
             {
-                _logger.LogError("COULDN'T REMOVE!");
-            }
-            else
-            {
-                _logger.LogWarning("PERSON WILL BE DELETED!");
+                Person = p
+            };
 
-                Ok(personCommand);
-            }
+            var status = _mediator.Send(command);
+
+            Ok(status);
         }
     }
 }
