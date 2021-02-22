@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -13,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Next.Steps.Application\Next.Steps.Application.csproj" />
     <ProjectReference Include="..\Next.Steps.Domain\Next.Steps.Domain.csproj" />
     <ProjectReference Include="..\Next.Steps.Repository.Fake\Next.Steps.Repository.Fake.csproj" />
   </ItemGroup>
