@@ -59,7 +59,7 @@ namespace Next.Steps.API.Controllers
             }
         }
 
-        [HttpPost()]
+        [HttpPost]
         public void Create(PersonDto p)
         {
             var command = new PersonCreateCommand
@@ -72,7 +72,7 @@ namespace Next.Steps.API.Controllers
             Ok(status);
         }
 
-        [HttpPut()]
+        [HttpPut]
         public void Put(PersonDto p)
         {
             var command = new PersonUpdateCommand
@@ -85,7 +85,7 @@ namespace Next.Steps.API.Controllers
             Ok(status);
         }
 
-        [HttpDelete()]
+        [HttpDelete]
         public void Delete(PersonDto p)
         {
             var command = new PersonDeleteCommand
@@ -96,6 +96,23 @@ namespace Next.Steps.API.Controllers
             var status = _mediator.Send(command);
 
             Ok(status);
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<PersonDto>> Search(string firstName, string lastName = "")
+        {
+            var query = new PersonGetAllQuery();
+
+            var response = _mediator.Send(query);
+
+            if (response == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(response);
+            }
         }
     }
 }
