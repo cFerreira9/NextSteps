@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Next.Steps.Domain.Entities;
+using Next.Steps.Repository.Fake;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,47 +16,88 @@ namespace Next.Steps.API.Controllers
     {
         private readonly ILogger<PersonController> _logger;
 
+        private readonly FakeRepo _frepo = new FakeRepo();
+
         public PersonController(ILogger<PersonController> logger)
         {
            _logger = logger;
         }
 
         [HttpGet]
-        public IEnumerable<Person> GetAll()
+        public ActionResult<IEnumerable<Person>> GetAll()
         {
-            var list = new List<Person>();
+            var personCommand = _frepo.GetAll();
 
-            //_logger.LogInformation("");
-
-            //if (list == null)
-            //{
-            //    _logger.LogWarning("");
-            //    return NotFound();
-            //}
-            return list;
+            if (personCommand == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(personCommand);
+            }
         }
 
         [HttpGet("{id}")]
-        public Person GetById(int id)
+        public ActionResult<Person> GetById(int id)
         {
-            return null;
+            var personCommand = _frepo.GetByID(id);
+
+            if (personCommand != _frepo.GetByID(id))
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(personCommand);
+            }
         }
 
-        [HttpPost]
-        public void Post(Person p)
+        [HttpPost()]
+        public void Create(Person p)
         {
+            var personCommand = _frepo.Create(p);
+
+            if (personCommand != true)
+            {
+                _logger.LogError("COULDN'T CREATE!");
+            }
+            else
+            {
+                Ok(personCommand);
+            }
         }
 
         [HttpPut("{id}")]
         public void Put(Person p)
         {
+            var personCommand = _frepo.Update(p);
 
+            if (personCommand != true)
+            {
+                _logger.LogError("COULDN'T UPDATE!");
+            }
+            else
+            {
+                Ok(personCommand);
+            }
         }
 
         [HttpDelete("{id}")]
         public void Delete(Person p)
         {
+            var personCommand = _frepo.Delete(p);
 
+            if (personCommand != true)
+            {
+                _logger.LogError("COULDN'T REMOVE!");
+            }
+            else
+            {
+                _logger.LogWarning("PERSON WILL BE DELETED!");
+
+                Ok(personCommand);
+            }
         }
     }
 }

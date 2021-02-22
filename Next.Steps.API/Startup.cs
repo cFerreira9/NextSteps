@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Next.Steps.Domain.Interfaces.Repositories;
+using Next.Steps.Repository.Fake;
 
 namespace Next.Steps.API
 {
@@ -20,6 +22,8 @@ namespace Next.Steps.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddScoped<IPersonRepository, FakeRepo>();
 
             services.AddSwaggerGen(c =>
             {
