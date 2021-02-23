@@ -13,4 +13,8 @@
     <ProjectReference Include="..\Next.Steps.Domain\Next.Steps.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="QueryResult\" />
+  </ItemGroup>
+
 </Project>
