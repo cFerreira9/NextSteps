@@ -10,7 +10,7 @@ namespace Next.Steps.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class PersonController : ControllerBase
+    public class PersonController : Controller
     {
         private readonly ILogger<PersonController> _logger;
 
