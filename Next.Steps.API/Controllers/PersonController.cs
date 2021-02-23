@@ -22,8 +22,12 @@ namespace Next.Steps.API.Controllers
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Get All Persons
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public ActionResult<IEnumerable<PersonDto>> GetAll()
+        public IActionResult GetAll()
         {
             var query = new PersonGetAllQuery();
 
@@ -39,8 +43,13 @@ namespace Next.Steps.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Get Person by Id
+        /// </summary>
+        /// <param name="id">1</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
-        public ActionResult<PersonDto> GetById(int id)
+        public IActionResult GetById(int id)
         {
             var query = new PersonGetByIdQuery
             {
@@ -59,8 +68,13 @@ namespace Next.Steps.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Create Person
+        /// </summary>
+        /// <param name="p">Pessoa</param>
+        /// <returns></returns>
         [HttpPost]
-        public void Create(PersonDto p)
+        public IActionResult Create(PersonDto p)
         {
             var command = new PersonCreateCommand
             {
@@ -69,11 +83,11 @@ namespace Next.Steps.API.Controllers
 
             var status = _mediator.Send(command);
 
-            Ok(status);
+            return Ok(status);
         }
 
         [HttpPut]
-        public void Put(PersonDto p)
+        public IActionResult Put(PersonDto p)
         {
             var command = new PersonUpdateCommand
             {
@@ -82,11 +96,16 @@ namespace Next.Steps.API.Controllers
 
             var status = _mediator.Send(command);
 
-            Ok(status);
+            return Ok(status);
         }
 
+        /// <summary>
+        /// Delete Person
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         [HttpDelete]
-        public void Delete(PersonDto p)
+        public IActionResult Delete(PersonDto p)
         {
             var command = new PersonDeleteCommand
             {
@@ -95,13 +114,19 @@ namespace Next.Steps.API.Controllers
 
             var status = _mediator.Send(command);
 
-            Ok(status);
+            return Ok(status);
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<PersonDto>> Search(string firstName, string lastName = "")
+        /// <summary>
+        /// Search person by firstname or lastname
+        /// </summary>
+        /// <param name="firstName">Carlos</param>
+        /// <param name="lastName">Ferreira</param>
+        /// <returns></returns>
+        [HttpGet("/search")]
+        public IActionResult Search(string firstName, string lastName = "")
         {
-            var query = new PersonGetAllQuery();
+            var query = new PersonSearchQuery();
 
             var response = _mediator.Send(query);
 

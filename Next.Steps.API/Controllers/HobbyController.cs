@@ -12,18 +12,18 @@ namespace Next.Steps.API.Controllers
     [ApiController]
     public class HobbyController : ControllerBase
     {
-        private readonly ILogger<PersonController> _logger;
+        private readonly ILogger<HobbyController> _logger;
 
         private readonly IMediator _mediator;
 
-        public HobbyController(ILogger<PersonController> logger, IMediator mediator)
+        public HobbyController(ILogger<HobbyController> logger, IMediator mediator)
         {
             _logger = logger;
             _mediator = mediator;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<HobbyDto>> GetAll()
+        public IActionResult GetAll()
         {
             var query = new HobbyGetAllQuery();
 
@@ -40,7 +40,7 @@ namespace Next.Steps.API.Controllers
         }
 
         [HttpPost]
-        public void Create(HobbyDto h)
+        public IActionResult Create(HobbyDto h)
         {
             var command = new HobbyCreateCommand
             {
@@ -49,11 +49,11 @@ namespace Next.Steps.API.Controllers
 
             var status = _mediator.Send(command);
 
-            Ok(status);
+            return Ok(status);
         }
 
         [HttpPut]
-        public void Put(HobbyDto h)
+        public IActionResult Put(HobbyDto h)
         {
             var command = new HobbyUpdateCommand
             {
@@ -62,11 +62,11 @@ namespace Next.Steps.API.Controllers
 
             var status = _mediator.Send(command);
 
-            Ok(status);
+            return Ok(status);
         }
 
         [HttpDelete]
-        public void Delete(HobbyDto h)
+        public IActionResult Delete(HobbyDto h)
         {
             var command = new HobbyDeleteCommand
             {
@@ -75,7 +75,7 @@ namespace Next.Steps.API.Controllers
 
             var status = _mediator.Send(command);
 
-            Ok(status);
+            return Ok(status);
         }
     }
 }
