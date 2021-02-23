@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Next.Steps.Repository.EF.Repository
 {
-    internal class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
         private readonly NextStepsContext _nextStepsContext;
 
