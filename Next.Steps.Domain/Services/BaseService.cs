@@ -1,14 +1,33 @@
-﻿using Next.Steps.Domain.Interfaces.Services;
+﻿using Next.Steps.Domain.Entities;
+using Next.Steps.Domain.Interfaces.Repositories;
+using Next.Steps.Domain.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 
 namespace Next.Steps.Domain.Services
 {
-    internal class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class
+    public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class
     {
+        private IBaseRepository<TEntity> _frepo;
+
+        public BaseService(IBaseRepository<TEntity> frepo)
+        {
+            _frepo = frepo;
+        }
+
         public bool Create(TEntity p)
         {
-            throw new NotImplementedException();
+
+
+            if (p == null)
+            {
+                return false;
+            }
+            else
+            {
+                _frepo.Create(p);
+                return true;
+            }
         }
 
         public bool Update(TEntity p)
