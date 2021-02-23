@@ -11,5 +11,9 @@ namespace Next.Steps.Domain.Interfaces.Services
         bool Delete(int id);
 
         IEnumerable<TEntity> GetAll();
+
+        TEntity GetByID(int id);
+
+        IEnumerable<TEntity> Search(string firstName, string lastName = "");
     }
 }

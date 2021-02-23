@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Next.Steps.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -23,6 +24,6 @@ namespace Next.Steps.Application.Dto
         [Required(ErrorMessage = "Person's Email is Required")]
         public string Email { get; set; }
 
-        public virtual IEnumerable<HobbyDto> Hobbies { get; set; }
+        public virtual IEnumerable<Hobby> Hobbies { get; set; }
     }
 }

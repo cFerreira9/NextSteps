@@ -25,5 +25,15 @@ namespace Next.Steps.Domain.Services
         {
             throw new NotImplementedException();
         }
+
+        public TEntity GetByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<TEntity> Search(string firstName, string lastName = "")
+        {
+            throw new NotImplementedException();
+        }
     }
 }
