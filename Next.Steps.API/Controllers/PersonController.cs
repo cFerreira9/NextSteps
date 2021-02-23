@@ -81,11 +81,16 @@ namespace Next.Steps.API.Controllers
                 Person = p
             };
 
-            var status = _mediator.Send(command);
+            var response = _mediator.Send(command);
 
-            return Ok(status);
+            return Ok(response);
         }
 
+        /// <summary>
+        /// Update Person
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         [HttpPut]
         public IActionResult Put(PersonDto p)
         {
