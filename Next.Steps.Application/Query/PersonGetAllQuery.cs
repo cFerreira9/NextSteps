@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Next.Steps.Application.Query
 {
-    public class PersonGetAllQuery : IRequest<string>
+    public class PersonGetAllQuery : IRequest<IEnumerable<PersonReadDto>>
     {
     }
 }
