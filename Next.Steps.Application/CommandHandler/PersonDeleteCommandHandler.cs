@@ -17,8 +17,6 @@ namespace Next.Steps.Application.CommandHandler
         protected override void Handle(PersonDeleteCommand request)
         {
             
-
-            _service.Delete();
         }
     }
 }
