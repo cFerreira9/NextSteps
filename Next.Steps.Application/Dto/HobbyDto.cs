@@ -8,8 +8,6 @@ namespace Next.Steps.Application.Dto
     {
         public int Id { get; set; }
 
-        public int PersonId { get; set; }
-
         public string Name { get; set; }
 
         public string Type { get; set; }
