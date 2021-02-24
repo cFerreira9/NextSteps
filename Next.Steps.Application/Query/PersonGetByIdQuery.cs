@@ -2,7 +2,7 @@
 
 namespace Next.Steps.Application.Query
 {
-    public class PersonGetByIdQuery : IRequest<string>
+    public class PersonGetByIdQuery : IRequest
     {
         public int Id { get; set; }
 
