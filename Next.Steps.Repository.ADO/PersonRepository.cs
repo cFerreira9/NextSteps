@@ -141,7 +141,7 @@ namespace Next.Steps.Repository.ADO
             return list;
         }
 
-        public Person GetByID(int id)
+        public Person GetById(int id)
         {
             var queryString = "SELECT Person.Firstname, Person.Lastname, Person.Profession, Person.Birthdate, Person.Email, Person.Hobbies"
                 + "FROM Person"

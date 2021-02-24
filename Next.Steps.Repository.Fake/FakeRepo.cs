@@ -65,7 +65,7 @@ namespace Next.Steps.Repository.Fake
             return personList;
         }
 
-        public Person GetByID(int id)
+        public Person GetById(int id)
         {
             var index = personList.FindIndex(l => l.Id == id);
             if (index >= 0)
