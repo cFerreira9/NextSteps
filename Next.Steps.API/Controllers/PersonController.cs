@@ -107,19 +107,26 @@ namespace Next.Steps.API.Controllers
         /// <summary>
         /// Delete Person
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete]
-        public IActionResult Delete(PersonReadDto p)
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
         {
             var command = new PersonDeleteCommand
             {
-                Person = p
+                Id = id
             };
 
-            var status = _mediator.Send(command);
+            var status = _mediator.Send(command).Result;
 
-            return Ok(status);
+            if (status)
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         /// <summary>
@@ -129,7 +136,7 @@ namespace Next.Steps.API.Controllers
         /// <param name="lastName">Ferreira</param>
         /// <returns></returns>
         [HttpGet("/search")]
-        public IActionResult Search(string firstName, string lastName = "")
+        public ActionResult Search(string firstName, string lastName = "")
         {
             var query = new PersonSearchQuery();
 

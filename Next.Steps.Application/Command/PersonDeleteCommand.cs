@@ -3,8 +3,8 @@ using Next.Steps.Application.Dto;
 
 namespace Next.Steps.Application.Command
 {
-    public class PersonDeleteCommand : IRequest
+    public class PersonDeleteCommand : IRequest<bool>
     {
-        public PersonReadDto Person;
+        public int Id;
     }
 }
