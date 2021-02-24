@@ -5,6 +5,6 @@ namespace Next.Steps.Application.Command
 {
     public class PersonCreateCommand : IRequest
     {
-        public PersonReadDto Person { get; set; }
+        public PersonWriteDto Person;
     }
 }

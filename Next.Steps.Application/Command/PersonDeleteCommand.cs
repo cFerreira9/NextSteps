@@ -5,6 +5,6 @@ namespace Next.Steps.Application.Command
 {
     public class PersonDeleteCommand : IRequest
     {
-        public PersonReadDto Person { get; set; }
+        public PersonReadDto Person;
     }
 }
