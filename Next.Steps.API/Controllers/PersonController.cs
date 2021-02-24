@@ -74,7 +74,7 @@ namespace Next.Steps.API.Controllers
         /// <param name="p">Pessoa</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Create(PersonDto p)
+        public IActionResult Create(PersonReadDto p)
         {
             var command = new PersonCreateCommand
             {
@@ -92,7 +92,7 @@ namespace Next.Steps.API.Controllers
         /// <param name="p"></param>
         /// <returns></returns>
         [HttpPut]
-        public IActionResult Put(PersonDto p)
+        public IActionResult Put(PersonReadDto p)
         {
             var command = new PersonUpdateCommand
             {
@@ -110,7 +110,7 @@ namespace Next.Steps.API.Controllers
         /// <param name="p"></param>
         /// <returns></returns>
         [HttpDelete]
-        public IActionResult Delete(PersonDto p)
+        public IActionResult Delete(PersonReadDto p)
         {
             var command = new PersonDeleteCommand
             {
