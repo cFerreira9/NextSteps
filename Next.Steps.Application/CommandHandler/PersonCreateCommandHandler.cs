@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Next.Steps.Application.Command;
+using Next.Steps.Application.Dto;
 using Next.Steps.Domain.Entities;
 using Next.Steps.Domain.Interfaces.Services;
+using System;
 
 namespace Next.Steps.Application.CommandHandler
 {
@@ -16,7 +18,7 @@ namespace Next.Steps.Application.CommandHandler
 
         protected override void Handle(PersonCreateCommand request)
         {
-            var x = new Person
+            var x = new PersonWriteDto
             {
                 FirstName = request.Person.FirstName,
                 LastName = request.Person.LastName,
