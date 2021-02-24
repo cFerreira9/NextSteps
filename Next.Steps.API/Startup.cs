@@ -5,6 +5,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Next.Steps.Application.CommandHandler;
+using Next.Steps.Domain.Entities;
+using Next.Steps.Domain.Interfaces.Repositories;
+using Next.Steps.Domain.Interfaces.Services;
+using Next.Steps.Domain.Services;
+using Next.Steps.Repository.Fake;
 using System;
 using System.IO;
 using System.Reflection;
@@ -25,11 +31,16 @@ namespace Next.Steps.API
         {
             services.AddControllers();
 
+            services.AddScoped(typeof(IPersonService), typeof(PersonService));
+
+            services.AddScoped(typeof(IPersonRepository), typeof(FakeRepo));
+
             services.AddMvc();
 
-            services.AddMediatR(typeof(Startup));
-
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            var assembly = AppDomain.CurrentDomain.Load("Next.Steps.Application");
+            services.AddMediatR(assembly);
 
             services.AddSwaggerGen(c =>
             {
