@@ -74,7 +74,7 @@ namespace Next.Steps.Repository.ADO
             }
         }
 
-        public bool Delete(Person p)
+        public bool Delete(int id)
         {
             string queryString = "DELETE FROM Users"
                 + "WHERE Id = @Id";
@@ -87,7 +87,7 @@ namespace Next.Steps.Repository.ADO
                 {
                     conn.Open();
 
-                    cmd.Parameters.AddWithValue("@Id", p.Id);
+                    cmd.Parameters.AddWithValue("@Id", id);
 
                     conn.Close();
 

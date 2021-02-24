@@ -6,14 +6,14 @@ using System.Collections.Generic;
 
 namespace Next.Steps.Domain.Services
 {
-    //TODO: Para revisão
+    //TODO: Verificar o Search
     public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class
     {
-        private IBaseRepository<TEntity> _frepo;
+        private IBaseRepository<TEntity> _repo;
 
         public BaseService(IBaseRepository<TEntity> frepo)
         {
-            _frepo = frepo;
+            _repo = frepo;
         }
 
         public bool Create(TEntity p)
@@ -24,7 +24,7 @@ namespace Next.Steps.Domain.Services
             }
             else
             {
-                _frepo.Create(p);
+                _repo.Create(p);
                 return true;
             }
         }
@@ -37,27 +37,19 @@ namespace Next.Steps.Domain.Services
             }
             else
             {
-                _frepo.Update(p);
+                _repo.Update(p);
                 return true;
             }
         }
 
-        public bool Delete(TEntity p)
+        public bool Delete(int id)
         {
-            if (p == null)
-            {
-                return false;
-            }
-            else
-            {
-                _frepo.Delete(p);
-                return true;
-            }
+            return _repo.Delete(id);
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            return _frepo.GetAll();
+            return _repo.GetAll();
         }
 
         public TEntity GetByID(int id)
@@ -68,27 +60,27 @@ namespace Next.Steps.Domain.Services
             }
             else
             {
-                return _frepo.GetByID(id);
+                return _repo.GetById(id);
             }
         }
 
         public IEnumerable<TEntity> Search(string firstName, string lastName = "")
         {
-            if (firstName == "" || lastName =="")
+            if (firstName == "" || lastName == "")
             {
                 return null;
             }
             else if (firstName == "")
             {
-                return _frepo.Search(lastName);
+                return _repo.Search(lastName);
             }
             else if (lastName == "")
             {
-                return _frepo.Search(firstName);
+                return _repo.Search(firstName);
             }
             else
             {
-                return _frepo.Search(firstName, lastName);
+                return _repo.Search(firstName, lastName);
             }
         }
     }

@@ -47,13 +47,13 @@ namespace Next.Steps.Repository.Fake
             return false;
         }
 
-        public bool Delete(Person p)
+        public bool Delete(int id)
         {
-            var index = personList.IndexOf(p);
+            var index = personList.FindIndex(x => x.Id == id);
 
             if (index >= 0)
             {
-                personList.Remove(p);
+                personList.RemoveAt(index);
                 return true;
             }
 

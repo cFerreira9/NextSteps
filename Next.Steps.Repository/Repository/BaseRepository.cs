@@ -44,11 +44,12 @@ namespace Next.Steps.Repository.EF.Repository
             }
         }
 
-        public bool Delete(TEntity p)
+        public bool Delete(int id)
         {
             try
             {
-                _nextStepsContext.Set<TEntity>().Remove(p);
+                var person = _nextStepsContext.People.Where(p => p.Id == id).Include( p => p.Hobbies).FirstOrDefault();
+                _nextStepsContext.People.Remove(person);
                 _nextStepsContext.SaveChanges();
                 return true;
             }
@@ -63,7 +64,7 @@ namespace Next.Steps.Repository.EF.Repository
             return _nextStepsContext.Set<TEntity>().ToList();
         }
 
-        public TEntity GetByID(int id)
+        public TEntity GetById(int id)
         {
             return _nextStepsContext.Set<TEntity>().Find(id);
         }
