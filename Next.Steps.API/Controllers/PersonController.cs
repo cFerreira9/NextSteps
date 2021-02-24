@@ -27,11 +27,11 @@ namespace Next.Steps.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult GetAll()
+        public ActionResult<IEnumerable<PersonReadDto>> GetAll()
         {
             var query = new PersonGetAllQuery();
 
-            var response = _mediator.Send(query);
+            var response = _mediator.Send(query).Result;
 
             if (response == null)
             {
@@ -49,14 +49,14 @@ namespace Next.Steps.API.Controllers
         /// <param name="id">1</param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public ActionResult<PersonReadDto> GetById(int id)
         {
             var query = new PersonGetByIdQuery
             {
                 Id = id
             };
 
-            var response = _mediator.Send(query);
+            var response = _mediator.Send(query).Result;
 
             if (response == null)
             {
@@ -74,7 +74,7 @@ namespace Next.Steps.API.Controllers
         /// <param name="p">Pessoa</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Create(PersonReadDto p)
+        public ActionResult Create(PersonWriteDto p)
         {
             var command = new PersonCreateCommand
             {
@@ -92,7 +92,7 @@ namespace Next.Steps.API.Controllers
         /// <param name="p"></param>
         /// <returns></returns>
         [HttpPut]
-        public IActionResult Put(PersonReadDto p)
+        public ActionResult Put(PersonReadDto p)
         {
             var command = new PersonUpdateCommand
             {
