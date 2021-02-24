@@ -5,6 +5,8 @@ using System.Text;
 
 namespace Next.Steps.Repository.EF.Repository
 {
+    //TODO: PersonRepo
+
     //public class PersonRepository : BaseRepository<Person>
     //{
 
