@@ -16,10 +16,10 @@ namespace Next.Steps.Application.Dto
 
         public string Profession { get; set; }
 
-        public DateTime? Birthdate { get; set; }
+        public string Birthdate { get; set; }
 
         public string Email { get; set; }
 
-        public virtual IEnumerable<HobbyDto> Hobbies { get; set; }
+        public List<HobbyDto> Hobbies { get; set; }
     }
 }
