@@ -59,14 +59,7 @@ namespace Next.Steps.Domain.Services
 
         public TEntity GetByID(int id)
         {
-            if (id <= 0)
-            {
-                return null;
-            }
-            else
-            {
-                return _repo.GetById(id);
-            }
+            return _repo.GetById(id);
         }
     }
 }

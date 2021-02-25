@@ -22,14 +22,7 @@ namespace Next.Steps.Domain.Services
 
         public IEnumerable<Person> Search(string firstName, string lastName)
         {
-            if (firstName == "" && lastName == "")
-            {
-                return null;
-            }
-            else
-            {
-                return _prepo.Search(firstName, lastName);
-            }
+            return _prepo.Search(firstName, lastName);
         }
     }
 }
