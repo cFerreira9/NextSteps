@@ -24,7 +24,6 @@ namespace Next.Steps.Application.QueryHandler
 
             if (personResult != null)
             {
-
                 var hobList = new List<HobbyDto>();
 
                 foreach (var hobb in personResult.Hobbies)
@@ -43,7 +42,7 @@ namespace Next.Steps.Application.QueryHandler
                     FirstName = personResult.FirstName,
                     LastName = personResult.LastName,
                     Profession = personResult.Profession,
-                    Birthdate = personResult.Birthdate,
+                    Birthdate = personResult.Birthdate.ToString(),
                     Email = personResult.Email,
                     Hobbies = hobList
                 };

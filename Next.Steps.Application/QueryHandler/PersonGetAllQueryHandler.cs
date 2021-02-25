@@ -19,7 +19,7 @@ namespace Next.Steps.Application.QueryHandler
 
         protected override IEnumerable<PersonReadDto> Handle(PersonGetAllQuery request)
         {
-            var list =_service.GetAll();
+            var list = _service.GetAll();
 
             var personList = new List<PersonReadDto>();
 
@@ -43,7 +43,7 @@ namespace Next.Steps.Application.QueryHandler
                     FirstName = item.FirstName,
                     LastName = item.LastName,
                     Profession = item.Profession,
-                    Birthdate = item.Birthdate,
+                    Birthdate = item.Birthdate.ToString(),
                     Email = item.Email,
                     Hobbies = hobList
                 });
