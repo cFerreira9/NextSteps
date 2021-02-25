@@ -136,5 +136,10 @@ namespace Next.Steps.Repository.Fake
                 (!string.IsNullOrWhiteSpace(firstName) && l.FirstName == firstName)
                 || (!string.IsNullOrWhiteSpace(lastName) && l.LastName == lastName));
         }
+
+        public bool Delete(Person p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
