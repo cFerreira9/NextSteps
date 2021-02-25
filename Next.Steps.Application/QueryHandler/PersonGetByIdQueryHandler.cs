@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Next.Steps.Application.Dto;
 using Next.Steps.Application.Query;
 using Next.Steps.Domain.Entities;
@@ -11,11 +12,13 @@ namespace Next.Steps.Application.QueryHandler
 {
     public class PersonGetByIdQueryHandler : RequestHandler<PersonGetByIdQuery, PersonReadDto>
     {
-        private IPersonService _service;
+        private readonly IPersonService _service;
+        private readonly IMapper _mapper;
 
-        public PersonGetByIdQueryHandler(IPersonService service)
+        public PersonGetByIdQueryHandler(IPersonService service, IMapper mapper)
         {
             _service = service;
+            _mapper = mapper;
         }
 
         protected override PersonReadDto Handle(PersonGetByIdQuery request)
@@ -24,30 +27,7 @@ namespace Next.Steps.Application.QueryHandler
 
             if (personResult != null)
             {
-                var hobList = new List<HobbyDto>();
-
-                foreach (var hobb in personResult.Hobbies)
-                {
-                    hobList.Add(new HobbyDto
-                    {
-                        Id = hobb.Id,
-                        Name = hobb.Name,
-                        Type = hobb.Type
-                    });
-                }
-
-                var personDto = new PersonReadDto
-                {
-                    Id = personResult.Id,
-                    FirstName = personResult.FirstName,
-                    LastName = personResult.LastName,
-                    Profession = personResult.Profession,
-                    Birthdate = personResult.Birthdate.ToString(),
-                    Email = personResult.Email,
-                    Hobbies = hobList
-                };
-
-                return personDto;
+                return _mapper.Map<Person, PersonReadDto>(personResult);
             }
             else
             {
