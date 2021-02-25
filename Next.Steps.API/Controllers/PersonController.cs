@@ -92,7 +92,7 @@ namespace Next.Steps.API.Controllers
         /// <param name="p"></param>
         /// <returns></returns>
         [HttpPut]
-        public ActionResult Put(PersonReadDto p)
+        public ActionResult Put(PersonUpdateDto p)
         {
             var command = new PersonUpdateCommand
             {
