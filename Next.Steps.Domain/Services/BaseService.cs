@@ -6,7 +6,7 @@ namespace Next.Steps.Domain.Services
 {
     public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class
     {
-        private IBaseRepository<TEntity> _repo;
+        private readonly IBaseRepository<TEntity> _repo;
 
         public BaseService(IBaseRepository<TEntity> repo)
         {
