@@ -29,7 +29,6 @@ namespace Next.Steps.Repository.ADO
                     cmd.Parameters.AddWithValue("@Profession", p.Profession);
                     cmd.Parameters.AddWithValue("@Birthdate", p.Birthdate);
                     cmd.Parameters.AddWithValue("@Email", p.Email);
-                    cmd.Parameters.AddWithValue("@Hobbies", p.Hobbies);
 
                     conn.Close();
                     return true;
@@ -44,7 +43,7 @@ namespace Next.Steps.Repository.ADO
         public bool Update(Person p)
         {
             string queryString = "UPDATE Person"
-                + "SET Firstname = @Firstname, LastName = @Lastname, Profession = @Profession, Birthdate = @Birthdate, Email = @Email, Hobbies = @Hobbies"
+                + "SET Firstname = @Firstname, LastName = @Lastname, Profession = @Profession, Birthdate = @Birthdate, Email = @Email"
                 + "WHERE Id = @Id";
 
             using (var conn = new SqlConnection(cs))
@@ -61,7 +60,6 @@ namespace Next.Steps.Repository.ADO
                     cmd.Parameters.AddWithValue("@Profession", p.Profession);
                     cmd.Parameters.AddWithValue("@Birthdate", p.Birthdate);
                     cmd.Parameters.AddWithValue("@Email", p.Email);
-                    cmd.Parameters.AddWithValue("@Hobbies", p.Hobbies);
 
                     conn.Close();
 
@@ -102,7 +100,7 @@ namespace Next.Steps.Repository.ADO
 
         public IEnumerable<Person> GetAll()
         {
-            var queryString = "SELECT Person.Firstname, Person.Lastname, Person.Profession, Person.Birthdate, Person.Email, Person.Hobbies"
+            var queryString = "SELECT Person.Firstname, Person.Lastname, Person.Profession, Person.Birthdate, Person.Email"
                 + "FROM Person";
 
             var list = new List<Person>();
@@ -125,8 +123,7 @@ namespace Next.Steps.Repository.ADO
                             LastName = (string)dr["Lastname"],
                             Profession = (string)dr["Profession"],
                             Birthdate = (DateTime)dr["Birthdate"],
-                            Email = (string)dr["Email"],
-                            Hobbies = (List<Hobby>)dr["Hobbies"]
+                            Email = (string)dr["Email"]
                         };
 
                         dr.Close();
@@ -143,7 +140,7 @@ namespace Next.Steps.Repository.ADO
 
         public Person GetById(int id)
         {
-            var queryString = "SELECT Person.Firstname, Person.Lastname, Person.Profession, Person.Birthdate, Person.Email, Person.Hobbies"
+            var queryString = "SELECT Person.Firstname, Person.Lastname, Person.Profession, Person.Birthdate, Person.Email"
                 + "FROM Person"
                 + "WHERE Id = @Id";
 
@@ -165,8 +162,7 @@ namespace Next.Steps.Repository.ADO
                             LastName = (string)dr["Lastname"],
                             Profession = (string)dr["Profession"],
                             Birthdate = (DateTime)dr["Birthdate"],
-                            Email = (string)dr["Email"],
-                            Hobbies = (List<Hobby>)dr["Hobbies"]
+                            Email = (string)dr["Email"]
                         };
                         return person;
                     }
@@ -184,7 +180,7 @@ namespace Next.Steps.Repository.ADO
         {
             var queryString = "SELECT Person.Firstname, Person.Lastname"
                 + "FROM Person"
-                + "WHERE Firstname = @Firstname";
+                + "WHERE Firstname = @Firstname OR Lastname = @Lastname";
 
             var list = new List<Person>();
 
