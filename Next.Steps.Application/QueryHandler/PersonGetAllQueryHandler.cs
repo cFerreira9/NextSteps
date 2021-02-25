@@ -1,6 +1,8 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Next.Steps.Application.Dto;
 using Next.Steps.Application.Query;
+using Next.Steps.Domain.Entities;
 using Next.Steps.Domain.Interfaces.Services;
 using System.Collections.Generic;
 using System.Threading;
@@ -10,45 +12,27 @@ namespace Next.Steps.Application.QueryHandler
 {
     public class PersonGetAllQueryHandler : RequestHandler<PersonGetAllQuery, IEnumerable<PersonReadDto>>
     {
-        private IPersonService _service;
+        private readonly IPersonService _service;
+        private readonly IMapper _mapper;
 
-        public PersonGetAllQueryHandler(IPersonService service)
+        public PersonGetAllQueryHandler(IPersonService service, IMapper mapper)
         {
             _service = service;
+            _mapper = mapper;
         }
 
         protected override IEnumerable<PersonReadDto> Handle(PersonGetAllQuery request)
         {
             var list = _service.GetAll();
 
-            var personList = new List<PersonReadDto>();
-
-            foreach (var item in list)
+            if (list != null)
             {
-                var hobList = new List<HobbyDto>();
-
-                foreach (var hobb in item.Hobbies)
-                {
-                    hobList.Add(new HobbyDto
-                    {
-                        Id = hobb.Id,
-                        Name = hobb.Name,
-                        Type = hobb.Type
-                    });
-                }
-
-                personList.Add(new PersonReadDto
-                {
-                    Id = item.Id,
-                    FirstName = item.FirstName,
-                    LastName = item.LastName,
-                    Profession = item.Profession,
-                    Birthdate = item.Birthdate.ToString(),
-                    Email = item.Email,
-                    Hobbies = hobList
-                });
+                return _mapper.Map<IEnumerable<Person>, IEnumerable<PersonReadDto>>(list);
             }
-            return personList;
+            else
+            {
+                return null;
+            }
         }
     }
 }
