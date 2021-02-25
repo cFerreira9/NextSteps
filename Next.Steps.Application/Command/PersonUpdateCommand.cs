@@ -3,8 +3,8 @@ using Next.Steps.Application.Dto;
 
 namespace Next.Steps.Application.Command
 {
-    public class PersonUpdateCommand : IRequest
+    public class PersonUpdateCommand : IRequest<bool>
     {
-        public PersonReadDto Person;
+        public PersonUpdateDto Person;
     }
 }
