@@ -212,5 +212,10 @@ namespace Next.Steps.Repository.ADO
             }
             return list;
         }
+
+        public bool Delete(Person p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -39,15 +39,15 @@ namespace Next.Steps.Domain.Services
             }
         }
 
-        public bool Delete(int id)
+        public bool Delete(TEntity p)
         {
-            if (id <= 0)
+            if (p == null)
             {
                 return false;
             }
             else
             {
-                _repo.Delete(id);
+                _repo.Delete(p);
                 return true;
             }
         }

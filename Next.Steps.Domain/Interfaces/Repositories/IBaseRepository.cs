@@ -8,6 +8,8 @@ namespace Next.Steps.Domain.Interfaces.Repositories
 
         bool Update(TEntity p);
 
+        bool Delete(TEntity p);
+
         IEnumerable<TEntity> GetAll();
 
         TEntity GetById(int id);

@@ -15,6 +15,11 @@ namespace Next.Steps.Domain.Services
             _prepo = prepo;
         }
 
+        public bool Delete(int id)
+        {
+            return _prepo.Delete(id);
+        }
+
         public IEnumerable<Person> Search(string firstName, string lastName)
         {
             if (firstName == "" && lastName == "")

@@ -30,6 +30,13 @@ namespace Next.Steps.Repository.EF.Repository
             return true;
         }
 
+        public virtual bool Delete(TEntity p)
+        {
+            _context.Set<TEntity>().Remove(p);
+            _context.SaveChanges();
+            return true;
+        }
+
         public virtual IEnumerable<TEntity> GetAll()
         {
             return _context.Set<TEntity>().ToList();

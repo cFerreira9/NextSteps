@@ -8,7 +8,7 @@ namespace Next.Steps.Domain.Interfaces.Services
 
         bool Update(TEntity p);
 
-        bool Delete(int id);
+        bool Delete(TEntity obj);
 
         IEnumerable<TEntity> GetAll();
 
