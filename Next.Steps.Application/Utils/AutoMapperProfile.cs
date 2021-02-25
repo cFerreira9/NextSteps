@@ -20,6 +20,10 @@ namespace Next.Steps.Application.Utils
                 .ForMember(p => p.Birthdate, opt =>
                 opt.MapFrom(src => (DateTime)src.Birthdate));
 
+            CreateMap<PersonUpdateDto, Person>()
+                .ForMember(p => p.Birthdate, opt =>
+                opt.MapFrom(src => (DateTime)src.Birthdate));
+
             CreateMap<Hobby, HobbyDto>().ReverseMap();
             CreateMap<HobbyDto, Hobby>();
         }
