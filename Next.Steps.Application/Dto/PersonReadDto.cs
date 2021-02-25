@@ -7,7 +7,6 @@ namespace Next.Steps.Application.Dto
 {
     public class PersonReadDto
     {
-        [Required(ErrorMessage = "Person's Id is Required")]
         public int Id { get; set; }
 
         public string FirstName { get; set; }
