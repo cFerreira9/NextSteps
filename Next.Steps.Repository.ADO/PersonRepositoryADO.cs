@@ -6,10 +6,10 @@ using System.Data.SqlClient;
 
 namespace Next.Steps.Repository.ADO
 {
-    internal class PersonRepository : IPersonRepository
+    public class PersonRepositoryADO : IPersonRepository
     {
         private string cs = @"Data Source=DESKTOP-JN31U5B\SQLEXPRESS" + "Initial Catalog=CarlosFerreira_Project"
-                + "Integrated Security=True";
+                + "Integrated Security=True" + "User Id=sa" + "Password=Password1994";
 
         public bool Create(Person p)
         {
