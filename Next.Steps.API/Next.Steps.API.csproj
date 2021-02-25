@@ -24,7 +24,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Next.Steps.Application\Next.Steps.Application.csproj" />
     <ProjectReference Include="..\Next.Steps.Domain\Next.Steps.Domain.csproj" />
+    <ProjectReference Include="..\Next.Steps.Repository.ADO\Next.Steps.Repository.ADO.csproj" />
     <ProjectReference Include="..\Next.Steps.Repository.Fake\Next.Steps.Repository.Fake.csproj" />
+    <ProjectReference Include="..\Next.Steps.Repository\Next.Steps.Repository.EF.csproj" />
   </ItemGroup>
 
 

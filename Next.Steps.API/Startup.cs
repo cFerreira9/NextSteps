@@ -6,10 +6,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Next.Steps.Application.CommandHandler;
+using Next.Steps.Application.Utils;
 using Next.Steps.Domain.Entities;
 using Next.Steps.Domain.Interfaces.Repositories;
 using Next.Steps.Domain.Interfaces.Services;
 using Next.Steps.Domain.Services;
+using Next.Steps.Repository.ADO;
 using Next.Steps.Repository.Fake;
 using System;
 using System.IO;
@@ -33,11 +35,11 @@ namespace Next.Steps.API
 
             services.AddScoped(typeof(IPersonService), typeof(PersonService));
 
-            services.AddScoped(typeof(IPersonRepository), typeof(FakeRepo));
+            services.AddScoped(typeof(IPersonRepository), typeof(PersonRepositoryADO));
 
             services.AddMvc();
 
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(typeof(AutoMapperProfile));
 
             var assembly = AppDomain.CurrentDomain.Load("Next.Steps.Application");
             services.AddMediatR(assembly);
