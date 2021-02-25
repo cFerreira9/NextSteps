@@ -136,9 +136,13 @@ namespace Next.Steps.API.Controllers
         /// <param name="lastName">Ferreira</param>
         /// <returns></returns>
         [HttpGet("/search")]
-        public ActionResult Search(string firstName, string lastName = "")
+        public ActionResult Search(string firstName, string lastName)
         {
-            var query = new PersonSearchQuery();
+            var query = new PersonSearchQuery
+            {
+                Firstname = firstName,
+                Lastname = lastName
+            };
 
             var response = _mediator.Send(query);
 
