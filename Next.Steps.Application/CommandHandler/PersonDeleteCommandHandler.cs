@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Next.Steps.Application.Command;
 using Next.Steps.Application.Dto;
 using Next.Steps.Domain.Entities;
@@ -10,7 +11,7 @@ namespace Next.Steps.Application.CommandHandler
 {
     public class PersonDeleteCommandHandler : RequestHandler<PersonDeleteCommand, bool>
     {
-        private IPersonService _service;
+        private readonly IPersonService _service;
 
         public PersonDeleteCommandHandler(IPersonService service)
         {
