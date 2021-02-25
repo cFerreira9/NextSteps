@@ -1,5 +1,6 @@
 ﻿using Next.Steps.Domain.Entities;
 using Next.Steps.Domain.Interfaces.Repositories;
+using System;
 using System.Collections.Generic;
 
 namespace Next.Steps.Repository.Fake
@@ -7,12 +8,63 @@ namespace Next.Steps.Repository.Fake
     public class FakeRepo : IPersonRepository
     {
         private static List<Person> personList = new List<Person>();
-
-        //private static List<Hobby> hobbyList = new List<Hobby>();
-
         private static int personId = 1;
-
         private static int hobbyId = 1;
+
+        public FakeRepo()
+        {
+            var ler = new Hobby
+            {
+                Name = "Ler",
+                Type = "Cultura"
+            };
+
+            var jogar = new Hobby
+            {
+                Name = "Jogar",
+                Type = "Video-Jogos"
+            };
+
+            var dormir = new Hobby
+            {
+                Name = "Dormir",
+                Type = "Perguiça"
+            };
+
+            var carlos = new Person
+            {
+                FirstName = "Carlos",
+                LastName = "Ferreira",
+                Birthdate = DateTime.Now,
+                Email = "ad@hotmail.com",
+                Profession = "dev",
+                Hobbies = new List<Hobby>() { ler }
+            };
+
+            var monteiro = new Person
+            {
+                FirstName = "Pedro",
+                LastName = "Monteiro",
+                Birthdate = DateTime.Now,
+                Email = "fg@hotmail.com",
+                Profession = "dev",
+                Hobbies = new List<Hobby>() { dormir }
+            };
+
+            var mateus = new Person
+            {
+                FirstName = "Pedro",
+                LastName = "Mateus",
+                Birthdate = DateTime.Now,
+                Email = "ty@hotmail.com",
+                Profession = "dev",
+                Hobbies = new List<Hobby>() { jogar }
+            };
+
+            Create(carlos);
+            Create(monteiro);
+            Create(mateus);
+        }
 
         public bool Create(Person p)
         {
@@ -78,9 +130,11 @@ namespace Next.Steps.Repository.Fake
             }
         }
 
-        public IEnumerable<Person> Search(string firstName, string lastName = "")
+        public IEnumerable<Person> Search(string firstName, string lastName)
         {
-            return personList.FindAll(l => l.FirstName == firstName || (lastName != "" && l.LastName == lastName));
+            return personList.FindAll(l =>
+                (!string.IsNullOrWhiteSpace(firstName) && l.FirstName == firstName)
+                || (!string.IsNullOrWhiteSpace(lastName) && l.LastName == lastName));
         }
     }
 }
