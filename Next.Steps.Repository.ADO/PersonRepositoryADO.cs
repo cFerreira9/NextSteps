@@ -13,8 +13,8 @@ namespace Next.Steps.Repository.ADO
 
         public bool Create(Person p)
         {
-            string queryString = "INSERT INTO[Person](Firstname, Lastname, Profession, Birthdate, Email, Hobbies)"
-                + "VALUES(@Firstname, @Lastname, @Profession, @Birthdate, @Email, @Hobbies)";
+            string queryString = "INSERT INTO[Person](Firstname, Lastname, Profession, Birthdate, Email)"
+                + "VALUES(@Firstname, @Lastname, @Profession, @Birthdate, @Email)";
 
             using (var conn = new SqlConnection(cs))
             {
