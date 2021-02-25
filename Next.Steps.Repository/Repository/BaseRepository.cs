@@ -9,71 +9,35 @@ namespace Next.Steps.Repository.EF.Repository
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
-        private readonly NextStepsContext _nextStepsContext;
+        private readonly NextStepsContext _context;
 
-        public BaseRepository(NextStepsContext _nextStepsContext)
+        public BaseRepository(NextStepsContext context)
         {
-            this._nextStepsContext = _nextStepsContext;
+            _context = context;
         }
 
-        public bool Create(TEntity p)
+        public virtual bool Create(TEntity p)
         {
-            try
-            {
-                _nextStepsContext.Set<TEntity>().Add(p);
-                _nextStepsContext.SaveChanges();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            _context.Set<TEntity>().Add(p);
+            _context.SaveChanges();
+            return true;
         }
 
-        public bool Update(TEntity p)
+        public virtual bool Update(TEntity p)
         {
-            try
-            {
-                _nextStepsContext.Entry(p).State = EntityState.Modified;
-                _nextStepsContext.SaveChanges();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            _context.Set<TEntity>().Update(p);
+            _context.SaveChanges();
+            return true;
         }
 
-        public bool Delete(int id)
+        public virtual IEnumerable<TEntity> GetAll()
         {
-            try
-            {
-                var person = _nextStepsContext.People.Where(p => p.Id == id).Include( p => p.Hobbies).FirstOrDefault();
-                _nextStepsContext.People.Remove(person);
-                _nextStepsContext.SaveChanges();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return _context.Set<TEntity>().ToList();
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public virtual TEntity GetById(int id)
         {
-            return _nextStepsContext.Set<TEntity>().ToList();
-        }
-
-        public TEntity GetById(int id)
-        {
-            return _nextStepsContext.Set<TEntity>().Find(id);
-        }
-
-        public IEnumerable<TEntity> Search(string firstName, string lastName = "")
-        {
-            //TODO: Search Repo
-            //return _nextStepsContext.Set<TEntity>().ToList().FindAll(x => x.);
-            return null;
+            return _context.Set<TEntity>().Find(id);
         }
     }
 }

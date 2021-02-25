@@ -1,19 +1,16 @@
-﻿using Next.Steps.Domain.Entities;
-using Next.Steps.Domain.Interfaces.Repositories;
+﻿using Next.Steps.Domain.Interfaces.Repositories;
 using Next.Steps.Domain.Interfaces.Services;
-using System;
 using System.Collections.Generic;
 
 namespace Next.Steps.Domain.Services
 {
-    //TODO: Verificar o Search
     public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class
     {
         private IBaseRepository<TEntity> _repo;
 
-        public BaseService(IBaseRepository<TEntity> frepo)
+        public BaseService(IBaseRepository<TEntity> repo)
         {
-            _repo = frepo;
+            _repo = repo;
         }
 
         public bool Create(TEntity p)
@@ -44,7 +41,15 @@ namespace Next.Steps.Domain.Services
 
         public bool Delete(int id)
         {
-            return _repo.Delete(id);
+            if (id <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                _repo.Delete(id);
+                return true;
+            }
         }
 
         public IEnumerable<TEntity> GetAll()
@@ -61,26 +66,6 @@ namespace Next.Steps.Domain.Services
             else
             {
                 return _repo.GetById(id);
-            }
-        }
-
-        public IEnumerable<TEntity> Search(string firstName, string lastName = "")
-        {
-            if (firstName == "" || lastName == "")
-            {
-                return null;
-            }
-            else if (firstName == "")
-            {
-                return _repo.Search(lastName);
-            }
-            else if (lastName == "")
-            {
-                return _repo.Search(firstName);
-            }
-            else
-            {
-                return _repo.Search(firstName, lastName);
             }
         }
     }

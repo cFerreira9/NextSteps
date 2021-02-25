@@ -18,32 +18,20 @@ namespace Next.Steps.Repository.EF.Repository
             _context = context;
         }
 
-        public new IEnumerable<Person> GetAll()
+        public override IEnumerable<Person> GetAll()
         {
             return _context.People.Include(p => p.Hobbies).ToList();
         }
 
-        public new Person GetById(int id)
+        public override Person GetById(int id)
         {
-            return _context.People.Where(p => p.Id == id).Include(p => p.Hobbies).FirstOrDefault();
+            return _context.People
+                .Where(p => p.Id == id)
+                .Include(p => p.Hobbies)
+                .FirstOrDefault();
         }
 
-        public new bool Create(Person p)
-        {
-            try
-            {
-                _context.People.Add(p);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                //TODO Escrever logger exception ex
-                return false;
-            }
-        }
-
-        public new bool Update(Person p)
+        public override bool Update(Person p)
         {
             try
             {
@@ -58,11 +46,11 @@ namespace Next.Steps.Repository.EF.Repository
             }
         }
 
-        public new bool Delete(int id)
+        public bool Delete(int id)
         {
             try
             {
-                var result = _context.People.Where(p => p.Id == id).Include(p => p.Hobbies).FirstOrDefault();
+                var result = GetById(id);
                 _context.People.Remove(result);
                 _context.SaveChanges();
                 return true;
@@ -72,6 +60,14 @@ namespace Next.Steps.Repository.EF.Repository
                 //TODO Escrever logger exception ex
                 return false;
             }
+        }
+
+        public IEnumerable<Person> Search(string firstName, string lastName)
+        {
+            return _context.People.Where(l =>
+                (!string.IsNullOrWhiteSpace(firstName) && l.FirstName == firstName)
+                || (!string.IsNullOrWhiteSpace(lastName) && l.LastName == lastName))
+                .Include(p => p.Hobbies);
         }
     }
 }
