@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,6 +10,7 @@ using Next.Steps.Application.Utils;
 using Next.Steps.Domain.Interfaces.Repositories;
 using Next.Steps.Domain.Interfaces.Services;
 using Next.Steps.Domain.Services;
+using Next.Steps.Repository.Context;
 using Next.Steps.Repository.EF.Repository;
 using System;
 using System.IO;
@@ -29,6 +31,10 @@ namespace Next.Steps.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            var connection = Configuration["ConnectionString"];
+            services.AddDbContext<NextStepsContext>
+                (options => options.UseSqlServer(connection));
 
             services.AddScoped(typeof(IPersonService), typeof(PersonService));
 
