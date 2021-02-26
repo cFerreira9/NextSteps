@@ -20,6 +20,6 @@ namespace Next.Steps.Application.Dto
 
         public string Email { get; set; }
 
-        public List<HobbyDto> Hobbies { get; set; }
+        public List<HobbyUpdateDto> Hobbies { get; set; }
     }
 }
