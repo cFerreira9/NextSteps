@@ -24,6 +24,6 @@ namespace Next.Steps.Application.Dto
         [EmailAddress(ErrorMessage = "Invalid Email")]
         public string Email { get; set; }
 
-        public virtual IEnumerable<HobbyDto> Hobbies { get; set; }
+        public virtual IEnumerable<HobbyWriteDto> Hobbies { get; set; }
     }
 }
