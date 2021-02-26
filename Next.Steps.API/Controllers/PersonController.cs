@@ -5,6 +5,7 @@ using Next.Steps.Application.Command;
 using Next.Steps.Application.Dto;
 using Next.Steps.Application.Query;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Next.Steps.API.Controllers
 {
@@ -23,49 +24,35 @@ namespace Next.Steps.API.Controllers
         }
 
         /// <summary>
-        /// Get All Persons
+        /// Get All People
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<IEnumerable<PersonReadDto>> GetAll()
+        public async Task<IActionResult> GetAllAsyn()
         {
             var query = new PersonGetAllQuery();
 
-            var response = _mediator.Send(query).Result;
+            var response = await _mediator.Send(query);
 
-            if (response == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(response);
-            }
+            return Ok(response);
         }
 
         /// <summary>
         /// Get Person by Id
         /// </summary>
-        /// <param name="id">1</param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public ActionResult<PersonReadDto> GetById(int id)
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
             var query = new PersonGetByIdQuery
             {
                 Id = id
             };
 
-            var response = _mediator.Send(query).Result;
+            var response = await _mediator.Send(query);
 
-            if (response == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(response);
-            }
+            return Ok(response);
         }
 
         /// <summary>
@@ -74,14 +61,14 @@ namespace Next.Steps.API.Controllers
         /// <param name="p">Pessoa</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Create(PersonWriteDto p)
+        public async Task<IActionResult> CreateAsync(PersonWriteDto p)
         {
             var command = new PersonCreateCommand
             {
                 Person = p
             };
 
-            var response = _mediator.Send(command);
+            var response = await _mediator.Send(command);
 
             return Ok(response);
         }
@@ -92,14 +79,14 @@ namespace Next.Steps.API.Controllers
         /// <param name="p"></param>
         /// <returns></returns>
         [HttpPut]
-        public ActionResult Put(PersonUpdateDto p)
+        public async Task<IActionResult> PutAsync(PersonUpdateDto p)
         {
             var command = new PersonUpdateCommand
             {
                 Person = p
             };
 
-            var status = _mediator.Send(command);
+            var status = await _mediator.Send(command);
 
             return Ok(status);
         }
@@ -110,23 +97,16 @@ namespace Next.Steps.API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
             var command = new PersonDeleteCommand
             {
                 Id = id
             };
 
-            var status = _mediator.Send(command).Result;
+            var status = await _mediator.Send(command);
 
-            if (status)
-            {
-                return Ok();
-            }
-            else
-            {
-                return NotFound();
-            }
+            return Ok(status);
         }
 
         /// <summary>
@@ -136,7 +116,7 @@ namespace Next.Steps.API.Controllers
         /// <param name="lastName">Lastname to search</param>
         /// <returns></returns>
         [HttpGet("/[Action]")]
-        public ActionResult Search(string firstName, string lastName)
+        public async Task<IActionResult> SearchAsync(string firstName, string lastName)
         {
             var query = new PersonSearchQuery
             {
@@ -144,16 +124,9 @@ namespace Next.Steps.API.Controllers
                 Lastname = lastName
             };
 
-            var response = _mediator.Send(query);
+            var response = await _mediator.Send(query);
 
-            if (response == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(response);
-            }
+            return Ok(response);
         }
     }
 }
