@@ -19,11 +19,6 @@ namespace Next.Steps.Repository.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-JN31U5B\SQLEXPRESS;
-                Initial Catalog=Next_Steps_Project;
-                Persist Security Info=True;
-                User id=sa;
-                Password=Password1994");
             }
             base.OnConfiguring(optionsBuilder);
         }
