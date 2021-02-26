@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using Next.Steps.Application.Command;
 using Next.Steps.Application.Dto;
 using Next.Steps.Application.Query;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Next.Steps.API.Controllers
