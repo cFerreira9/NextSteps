@@ -132,10 +132,10 @@ namespace Next.Steps.API.Controllers
         /// <summary>
         /// Search person by firstname or lastname
         /// </summary>
-        /// <param name="firstName">Carlos</param>
-        /// <param name="lastName">Ferreira</param>
+        /// <param name="firstName">Firstname to search</param>
+        /// <param name="lastName">Lastname to search</param>
         /// <returns></returns>
-        [HttpGet("/search")]
+        [HttpGet("/[Action]")]
         public ActionResult Search(string firstName, string lastName)
         {
             var query = new PersonSearchQuery
