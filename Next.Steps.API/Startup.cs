@@ -40,7 +40,7 @@ namespace Next.Steps.API
 
             services.AddScoped(typeof(IPersonService), typeof(PersonService));
 
-            services.AddScoped(typeof(IPersonRepository), typeof(PersonRepositoryADO));
+            services.AddScoped(typeof(IPersonRepository), typeof(PersonRepository));
 
             services.AddMvc();
 
