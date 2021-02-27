@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+ next-steps-server:
+  image: mcr.microsoft.com/mssql/server:2019-latest
+  volumes:
+   - ./sql-volume:/var/opt/mssql/data
+  environment:
+   ACCEPT_EULA: 'Y'
+   SA_PASSWORD: 'Password1994'
+   MSSQL_PID: 'Developer'
+  ports:
+   - '9999:1433'
+
+ nextstepsapi:
+  build: .
+  environment:
+   ConnectionString: 'Server=next-steps-server;Database=Next-StepsDb;User=sa;Password=Password1994'
+  ports:
+   - '9696:80'
