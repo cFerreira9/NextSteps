@@ -10,6 +10,7 @@ using Next.Steps.Application.Utils;
 using Next.Steps.Domain.Interfaces.Repositories;
 using Next.Steps.Domain.Interfaces.Services;
 using Next.Steps.Domain.Services;
+using Next.Steps.Repository.ADO;
 using Next.Steps.Repository.Context;
 using Next.Steps.Repository.EF.Repository;
 using Next.Steps.Repository.Fake;
@@ -39,7 +40,7 @@ namespace Next.Steps.API
 
             services.AddScoped(typeof(IPersonService), typeof(PersonService));
 
-            services.AddScoped(typeof(IPersonRepository), typeof(PersonRepository));
+            services.AddScoped(typeof(IPersonRepository), typeof(PersonRepositoryADO));
 
             services.AddMvc();
 
