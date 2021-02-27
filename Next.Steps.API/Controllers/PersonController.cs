@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Next.Steps.Application.Command;
 using Next.Steps.Application.Dto;
 using Next.Steps.Application.Query;
+using Serilog;
 using System.Threading.Tasks;
 
 namespace Next.Steps.API.Controllers
@@ -12,13 +13,10 @@ namespace Next.Steps.API.Controllers
     [ApiController]
     public class PersonController : Controller
     {
-        private readonly ILogger<PersonController> _logger;
-
         private readonly IMediator _mediator;
 
-        public PersonController(ILogger<PersonController> logger, IMediator mediator)
+        public PersonController(IMediator mediator)
         {
-            _logger = logger;
             _mediator = mediator;
         }
 
@@ -27,7 +25,7 @@ namespace Next.Steps.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetAllAsyn()
+        public async Task<IActionResult> GetAllAsync()
         {
             var query = new PersonGetAllQuery();
 
