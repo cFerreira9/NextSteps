@@ -118,22 +118,22 @@ namespace Next.Steps.Repository.ADO
                 foreach (var hobby in p.Hobbies)
                 {
                     queryString = "UPDATE Hobby"
-                        + " SET Name = @Name, Type = @Type)"
+                        + " SET Name = @Name, Type = @Type"
                         + " WHERE Id = @Id";
 
                     cmd = new SqlCommand(queryString, conn);
 
                     try
                     {
+                        cmd.Parameters.AddWithValue("@Id", hobby.Id);
                         cmd.Parameters.AddWithValue("@Name", hobby.Name);
                         cmd.Parameters.AddWithValue("@Type", hobby.Type);
-                        cmd.Parameters.AddWithValue("@PersonId", p.Id);
 
                         cmd.ExecuteNonQuery();
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex.Message);
+                        throw ex;
                     }
                 }
                 return recordsAffected > 0;
@@ -309,9 +309,9 @@ namespace Next.Steps.Repository.ADO
 
         public IEnumerable<Person> Search(string firstName, string lastName)
         {
-            var queryString = "SELECT FirstName, LastName"
+            var queryString = "SELECT Id, FirstName, LastName, Profession, Birthdate, Email"
                 + " FROM People"
-                + " WHERE FirstName = @Firstname OR LastName = @Lastname";
+                + " WHERE (FirstName IS NULL OR FirstName = @Firstname) AND (LastName IS NULL OR LastName = @Lastname)";
 
             var list = new List<Person>();
 
@@ -328,20 +328,33 @@ namespace Next.Steps.Repository.ADO
                     Console.WriteLine(ex.Message);
                 }
 
+                cmd.Parameters.AddWithValue("@Firstname", firstName);
+                cmd.Parameters.AddWithValue("@Lastname", lastName);
+
                 var dr = cmd.ExecuteReader();
 
                 while (dr.Read())
                 {
                     var person = new Person()
                     {
+                        Id = (int)dr["Id"],
                         FirstName = (string)dr["FirstName"],
-                        LastName = (string)dr["LastName"]
+                        LastName = (string)dr["LastName"],
+                        Profession = (string)dr["Profession"],
+                        Birthdate = (DateTime)dr["Birthdate"],
+                        Email = (string)dr["Email"]
                     };
 
                     list.Add(person);
                 }
 
                 dr.Close();
+
+                foreach (var person in list)
+                {
+                    person.Hobbies = GetHobbiesByPersonId(person.Id);
+                }
+
                 return list;
             }
         }
