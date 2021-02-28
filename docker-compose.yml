@@ -14,6 +14,7 @@ services:
 
  nextstepsapi:
   build: .
+  restart: always
   environment:
    ConnectionString: 'Server=next-steps-server;Database=Next-StepsDb;User=sa;Password=Password1994'
   ports:
