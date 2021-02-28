@@ -42,6 +42,12 @@ namespace Next.Steps.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
+            if (id <= 0)
+            {
+                Log.Error("Invalid id: " + id);
+                return BadRequest();
+            }
+
             var query = new PersonGetByIdQuery
             {
                 Id = id

@@ -38,9 +38,14 @@ namespace Next.Steps.API
             services.AddDbContext<NextStepsContext>
                 (options => options.UseSqlServer(connection));
 
-            services.AddScoped(typeof(IPersonService), typeof(PersonService));
+            //Entity Framework
+            //services.AddScoped(typeof(IPersonRepository), typeof(PersonRepository));
 
-            services.AddScoped(typeof(IPersonRepository), typeof(PersonRepository));
+            //ADO
+            //services.AddScoped(typeof(IPersonRepository), typeof(PersonRepositoryADO));
+
+            //Fake
+            services.AddSingleton(typeof(IPersonRepository), typeof(FakeRepo));
 
             services.AddMvc();
 

@@ -55,7 +55,7 @@ namespace Next.Steps.Repository.EF.Repository
                 _context.SaveChanges();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //TODO Escrever logger exception ex
                 return false;

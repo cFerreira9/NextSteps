@@ -18,11 +18,11 @@ namespace Next.Steps.API
 
         public static void Main(string[] args)
         {
+            CreateHostBuilder(args).Build().Run();
+
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(Config)
                 .CreateLogger();
-
-            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
