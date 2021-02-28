@@ -2,6 +2,7 @@
 using Next.Steps.Domain.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Next.Steps.Repository.ADO
@@ -15,8 +16,9 @@ namespace Next.Steps.Repository.ADO
         {
             int recordsAffected;
 
-            string queryString = "INSERT INTO[People](FirstName, LastName, Profession, Birthdate, Email)"
-                + "VALUES(@Firstname, @Lastname, @Profession, @Birthdate, @Email)";
+            string queryString = "INSERT INTO[People](FirstName, LastName, Profession, Birthdate, Email) "
+                + "VALUES(@Firstname, @Lastname, @Profession, @Birthdate, @Email) "
+                + "SELECT @Id = SCOPE_IDENTITY()";
 
             using (var conn = new SqlConnection(cs))
             {
@@ -32,7 +34,21 @@ namespace Next.Steps.Repository.ADO
                     cmd.Parameters.AddWithValue("@Birthdate", p.Birthdate);
                     cmd.Parameters.AddWithValue("@Email", p.Email);
 
+                    SqlParameter outParam = new SqlParameter
+                    {
+                        ParameterName = "@Id",
+                        SqlDbType = SqlDbType.Int,
+                        Direction = ParameterDirection.Output
+                    };
+
+                    cmd.Parameters.Add(outParam);
+
                     recordsAffected = cmd.ExecuteNonQuery();
+
+                    if (recordsAffected == 1)
+                    {
+                        p.Id = (int)outParam.Value;
+                    }
 
                     conn.Close();
                 }
@@ -66,7 +82,7 @@ namespace Next.Steps.Repository.ADO
                     }
                 }
             }
-            return recordsAffected > 0;
+            return true;
         }
 
         public bool Update(Person p)
@@ -74,8 +90,8 @@ namespace Next.Steps.Repository.ADO
             int recordsAffected;
 
             string queryString = "UPDATE People"
-                + "SET FirstName = @Firstname, LastName = @Lastname, Profession = @Profession, Birthdate = @Birthdate, Email = @Email"
-                + "WHERE Id = @Id";
+                + " SET FirstName = @Firstname, LastName = @Lastname, Profession = @Profession, Birthdate = @Birthdate, Email = @Email"
+                + " WHERE Id = @Id";
 
             using (var conn = new SqlConnection(cs))
             {
@@ -93,8 +109,6 @@ namespace Next.Steps.Repository.ADO
                     cmd.Parameters.AddWithValue("@Email", p.Email);
 
                     recordsAffected = cmd.ExecuteNonQuery();
-
-                    conn.Close();
                 }
                 catch (Exception)
                 {
@@ -104,27 +118,22 @@ namespace Next.Steps.Repository.ADO
                 foreach (var hobby in p.Hobbies)
                 {
                     queryString = "UPDATE Hobby"
-                        + "SET Name = @Name, Type = @Type, PersonId = @PersonId)"
-                        + "VALUES(@Name, @Type, @PersonId)"
-                        + "WHERE Id = @Id";
+                        + " SET Name = @Name, Type = @Type)"
+                        + " WHERE Id = @Id";
 
                     cmd = new SqlCommand(queryString, conn);
 
                     try
                     {
-                        conn.Open();
-
                         cmd.Parameters.AddWithValue("@Name", hobby.Name);
                         cmd.Parameters.AddWithValue("@Type", hobby.Type);
                         cmd.Parameters.AddWithValue("@PersonId", p.Id);
 
                         cmd.ExecuteNonQuery();
-
-                        conn.Close();
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        return false;
+                        Console.WriteLine(ex.Message);
                     }
                 }
                 return recordsAffected > 0;
@@ -136,7 +145,7 @@ namespace Next.Steps.Repository.ADO
             int recordsAffected;
 
             string queryString = "DELETE FROM People"
-                + "WHERE Id = @Id";
+                + " WHERE Id = @Id";
 
             using (var conn = new SqlConnection(cs))
             {
@@ -149,8 +158,6 @@ namespace Next.Steps.Repository.ADO
                     cmd.Parameters.AddWithValue("@Id", id);
 
                     recordsAffected = cmd.ExecuteNonQuery();
-
-                    conn.Close();
                 }
                 catch (Exception)
                 {
@@ -183,7 +190,7 @@ namespace Next.Steps.Repository.ADO
 
                 var dr = cmd.ExecuteReader();
 
-                if (dr.Read())
+                while (dr.Read())
                 {
                     var person = new Person()
                     {
@@ -197,13 +204,57 @@ namespace Next.Steps.Repository.ADO
 
                     list.Add(person);
                 }
-                else
+
+                dr.Close();
+
+                foreach (var person in list)
                 {
-                    list = null;
+                    person.Hobbies = GetHobbiesByPersonId(person.Id);
+                }
+
+                return list;
+            }
+        }
+
+        public IEnumerable<Hobby> GetHobbiesByPersonId(int personId)
+        {
+            var queryString = "SELECT Id, Name, Type"
+                    + " FROM Hobby"
+                    + " WHERE PersonId = @PersonId";
+
+            var hobList = new List<Hobby>();
+
+            using (var conn = new SqlConnection(cs))
+            {
+                var cmd = new SqlCommand(queryString, conn);
+
+                try
+                {
+                    conn.Open();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+                cmd.Parameters.AddWithValue("@PersonId", personId);
+
+                var dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    var hobby = new Hobby()
+                    {
+                        Id = (int)dr["Id"],
+                        Name = (string)dr["Name"],
+                        Type = (string)dr["Type"]
+                    };
+
+                    hobList.Add(hobby);
                 }
 
                 dr.Close();
-                return list;
+                return hobList;
             }
         }
 
@@ -244,6 +295,7 @@ namespace Next.Steps.Repository.ADO
                         Birthdate = (DateTime)dr["Birthdate"],
                         Email = (string)dr["Email"]
                     };
+                    person.Hobbies = GetHobbiesByPersonId(person.Id);
                 }
                 else
                 {
@@ -255,11 +307,11 @@ namespace Next.Steps.Repository.ADO
             }
         }
 
-        public IEnumerable<Person> Search(string firstName, string lastName = "")
+        public IEnumerable<Person> Search(string firstName, string lastName)
         {
             var queryString = "SELECT FirstName, LastName"
-                + "FROM People"
-                + "WHERE FirstName = @Firstname OR LastName = @Lastname";
+                + " FROM People"
+                + " WHERE FirstName = @Firstname OR LastName = @Lastname";
 
             var list = new List<Person>();
 
@@ -278,7 +330,7 @@ namespace Next.Steps.Repository.ADO
 
                 var dr = cmd.ExecuteReader();
 
-                if (dr.Read())
+                while (dr.Read())
                 {
                     var person = new Person()
                     {
@@ -287,10 +339,6 @@ namespace Next.Steps.Repository.ADO
                     };
 
                     list.Add(person);
-                }
-                else
-                {
-                    list = null;
                 }
 
                 dr.Close();
