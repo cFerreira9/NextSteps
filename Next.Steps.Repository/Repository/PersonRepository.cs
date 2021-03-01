@@ -2,6 +2,7 @@
 using Next.Steps.Domain.Entities;
 using Next.Steps.Domain.Interfaces.Repositories;
 using Next.Steps.Repository.Context;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,24 +26,9 @@ namespace Next.Steps.Repository.EF.Repository
         public override Person GetById(int id)
         {
             return _context.People
-                .Where(p => p.Id == id)
-                .Include(p => p.Hobbies)
-                .FirstOrDefault();
-        }
-
-        public override bool Update(Person p)
-        {
-            try
-            {
-                _context.People.Update(p);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                //TODO Escrever logger exception ex
-                return false;
-            }
+            .Where(p => p.Id == id)
+            .Include(p => p.Hobbies)
+            .FirstOrDefault();
         }
 
         public bool Delete(int id)
@@ -54,9 +40,9 @@ namespace Next.Steps.Repository.EF.Repository
                 _context.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //TODO Escrever logger exception ex
+                Log.Error(ex.Message);
                 return false;
             }
         }

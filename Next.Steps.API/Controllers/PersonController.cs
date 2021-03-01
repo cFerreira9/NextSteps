@@ -30,6 +30,7 @@ namespace Next.Steps.API.Controllers
 
             var response = await _mediator.Send(query);
 
+            Log.Information("GetAll executado com sucesso.");
             return Ok(response);
         }
 
@@ -43,7 +44,7 @@ namespace Next.Steps.API.Controllers
         {
             if (id <= 0)
             {
-                Log.Error("Invalid id: " + id);
+                Log.Error("Id invalido: " + id);
                 return BadRequest();
             }
 
@@ -54,6 +55,7 @@ namespace Next.Steps.API.Controllers
 
             var response = await _mediator.Send(query);
 
+            Log.Information("GetById executado com sucesso.");
             return Ok(response);
         }
 
@@ -65,6 +67,12 @@ namespace Next.Steps.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAsync(PersonWriteDto p)
         {
+            if (p == null)
+            {
+                Log.Error("Objeto Person é null.");
+                return BadRequest();
+            }
+
             var command = new PersonCreateCommand
             {
                 Person = p
@@ -72,6 +80,7 @@ namespace Next.Steps.API.Controllers
 
             var response = await _mediator.Send(command);
 
+            Log.Information("Person criado com sucesso.");
             return Ok(response);
         }
 
@@ -83,6 +92,12 @@ namespace Next.Steps.API.Controllers
         [HttpPut]
         public async Task<IActionResult> PutAsync(PersonUpdateDto p)
         {
+            if (p == null)
+            {
+                Log.Error("Erro ao dar update.");
+                return BadRequest();
+            }
+
             var command = new PersonUpdateCommand
             {
                 Person = p
@@ -90,6 +105,7 @@ namespace Next.Steps.API.Controllers
 
             var status = await _mediator.Send(command);
 
+            Log.Information("Person atualizada com sucesso.");
             return Ok(status);
         }
 
@@ -101,6 +117,12 @@ namespace Next.Steps.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
+            if (id <= 0)
+            {
+                Log.Error("Id invalido: " + id);
+                return BadRequest();
+            }
+
             var command = new PersonDeleteCommand
             {
                 Id = id
@@ -108,6 +130,7 @@ namespace Next.Steps.API.Controllers
 
             var status = await _mediator.Send(command);
 
+            Log.Information("Person removida com sucesso.");
             return Ok(status);
         }
 
@@ -128,6 +151,7 @@ namespace Next.Steps.API.Controllers
 
             var response = await _mediator.Send(query);
 
+            Log.Information("Search executado com sucesso.");
             return Ok(response);
         }
     }
