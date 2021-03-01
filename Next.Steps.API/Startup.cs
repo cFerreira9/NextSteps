@@ -10,10 +10,8 @@ using Next.Steps.Application.Utils;
 using Next.Steps.Domain.Interfaces.Repositories;
 using Next.Steps.Domain.Interfaces.Services;
 using Next.Steps.Domain.Services;
-using Next.Steps.Repository.ADO;
 using Next.Steps.Repository.Context;
 using Next.Steps.Repository.EF.Repository;
-using Next.Steps.Repository.Fake;
 using System;
 using System.IO;
 using System.Reflection;
@@ -40,14 +38,7 @@ namespace Next.Steps.API
 
             services.AddScoped(typeof(IPersonService), typeof(PersonService));
 
-            //Entity Framework
-            //services.AddScoped(typeof(IPersonRepository), typeof(PersonRepository));
-
-            //ADO
-            services.AddScoped(typeof(IPersonRepository), typeof(PersonRepositoryADO));
-
-            //Fake
-            //services.AddSingleton(typeof(IPersonRepository), typeof(FakeRepo));
+            services.AddScoped(typeof(IPersonRepository), typeof(PersonRepository));
 
             services.AddMvc();
 
@@ -91,6 +82,10 @@ namespace Next.Steps.API
             {
                 endpoints.MapControllers();
             });
+
+            using var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
+            using var context = serviceScope.ServiceProvider.GetService<NextStepsContext>();
+            context.Database.Migrate();
         }
     }
 }

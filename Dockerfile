@@ -4,10 +4,9 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build-env
 WORKDIR /app
 
 COPY Next.Steps.API/Next.Steps.API.csproj ./
-WORKDIR Next.Steps.API
 RUN dotnet restore
 
-COPY . ./
+COPY . .
 RUN dotnet publish Next.Steps.sln -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim

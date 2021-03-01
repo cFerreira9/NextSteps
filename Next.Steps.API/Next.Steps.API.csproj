@@ -9,6 +9,11 @@
     <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>..\Next.Steps.API.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
@@ -36,8 +41,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Next.Steps.Application\Next.Steps.Application.csproj" />
     <ProjectReference Include="..\Next.Steps.Domain\Next.Steps.Domain.csproj" />
-    <ProjectReference Include="..\Next.Steps.Repository.ADO\Next.Steps.Repository.ADO.csproj" />
-    <ProjectReference Include="..\Next.Steps.Repository.Fake\Next.Steps.Repository.Fake.csproj" />
     <ProjectReference Include="..\Next.Steps.Repository\Next.Steps.Repository.EF.csproj" />
   </ItemGroup>
 

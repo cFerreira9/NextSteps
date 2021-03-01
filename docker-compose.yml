@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
- next-steps-server:
+ next-steps-db:
   image: mcr.microsoft.com/mssql/server:2019-latest
   volumes:
    - ./sql-volume:/var/opt/mssql/data
@@ -12,10 +12,12 @@ services:
   ports:
    - '9999:1433'
 
- nextstepsapi:
+ next-steps-api:
   build: .
   restart: always
   environment:
-   ConnectionString: 'Server=next-steps-server;Database=Next-StepsDb;User=sa;Password=Password1994'
+   ConnectionString: 'Server=next-steps-db;Database=NextStepsDb;User=sa;Password=Password1994'
   ports:
-   - '9696:80'
+   - '8080:80'
+  depends_on:
+   - next-steps-db
