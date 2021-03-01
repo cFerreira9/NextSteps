@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Next.Steps.Domain.Interfaces.Repositories;
+﻿using Next.Steps.Domain.Interfaces.Repositories;
 using Next.Steps.Repository.Context;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 

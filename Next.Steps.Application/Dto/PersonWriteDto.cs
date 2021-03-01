@@ -1,8 +1,6 @@
-﻿using Next.Steps.Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Next.Steps.Application.Dto
 {

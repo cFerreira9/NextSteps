@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Next.Steps.Application.Command;
 using Next.Steps.Application.Dto;
 using Next.Steps.Application.Query;

@@ -4,9 +4,7 @@ using Next.Steps.Application.Dto;
 using Next.Steps.Application.Query;
 using Next.Steps.Domain.Entities;
 using Next.Steps.Domain.Interfaces.Services;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Next.Steps.Application.QueryHandler
 {

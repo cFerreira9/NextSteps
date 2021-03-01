@@ -2,8 +2,6 @@
 using Next.Steps.Application.Dto;
 using Next.Steps.Domain.Entities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Next.Steps.Application.Utils
 {

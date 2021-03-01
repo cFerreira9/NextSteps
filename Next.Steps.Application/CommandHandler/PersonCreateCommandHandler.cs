@@ -4,8 +4,6 @@ using Next.Steps.Application.Command;
 using Next.Steps.Application.Dto;
 using Next.Steps.Domain.Entities;
 using Next.Steps.Domain.Interfaces.Services;
-using System;
-using System.Collections.Generic;
 
 namespace Next.Steps.Application.CommandHandler
 {
